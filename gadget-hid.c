@@ -75,7 +75,7 @@ static char report_desc[] = {
     0xC0,              // End Collection
 };
 
-int initUSB() {
+int pikb_initUSB() {
     int usbg_ret = -EINVAL;
 
     struct usbg_gadget_attrs g_attrs = {
@@ -165,7 +165,7 @@ out1:
     return usbg_ret;
 }
 
-int cleanupUSB(){
+int pikb_cleanupUSB(){
     if(g){
         usbg_disable_gadget(g);
         usbg_rm_gadget(g, USBG_RM_RECURSE);
