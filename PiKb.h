@@ -14,7 +14,9 @@
 #include <stdbool.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <sys/eventfd.h>
 #include "gadget-hid.h"
+#include <assert.h>
 
 int pikb_initUSB();
 int main();

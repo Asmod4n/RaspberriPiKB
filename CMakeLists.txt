@@ -1,14 +1,13 @@
-cmake_minimum_required(VERSION 3.10)
+cmake_minimum_required(VERSION 3.16)
 
 project(PiKb)
 
-# for asprintf
-set(CMAKE_C_STANDARD 99)
+set(CMAKE_C_STANDARD 17)
 set(CMAKE_C_STANDARD_REQUIRED ON)
 set(CMAKE_C_EXTENSIONS ON)
 add_compile_definitions(_GNU_SOURCE)
 
-option(NO_OUTPUT "Disable USB HID output" OFF)
+option(DEBUG "Show Debug Output" OFF)
 
 if(NOT HOOK_PATH)
     set(HOOK_PATH "~/PiKbhook.sh" CACHE STRING "Path to .sh toggle hook")
@@ -77,17 +76,13 @@ target_compile_definitions(PiKb PRIVATE
 
     HOOK_PATH="${HOOK_PATH}"
 
-    MOUSE_VID=${MOUSE_VID}
-    MOUSE_PID=${MOUSE_PID}
-    MOUSE_DEV="${MOUSE_DEV}"
-
     KEYBOARD_VID=${KEYBOARD_VID}
     KEYBOARD_PID=${KEYBOARD_PID}
     KEYBOARD_DEV="${KEYBOARD_DEV}"
 )
 
-if(NO_OUTPUT)
-    target_compile_definitions(PiKb PRIVATE NO_OUTPUT)
+if(DEBUG)
+    target_compile_definitions(PiKb PRIVATE DEBUG)
 endif()
 
 target_link_libraries(PiKb libusbgx uring)
